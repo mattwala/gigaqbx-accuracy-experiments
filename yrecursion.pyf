@@ -1,0 +1,15 @@
+!    -*- f90 -*-
+! Note: the context of this file is case sensitive.
+
+python module yrecursion ! in 
+    interface  ! in :yrecursion
+        subroutine ylgndru(nmax,x,y) ! in :yrecursion:yrecursion.f
+            integer intent(in) :: nmax
+            real*8 intent(in) :: x
+            real*8 dimension(nmax + 1,nmax + 1),intent(out),depend(nmax,nmax) :: y
+        end subroutine ylgndru
+    end interface 
+end python module yrecursion
+
+! This file was auto-generated with f2py (version:2).
+! See http://cens.ioc.ee/projects/f2py2e/
