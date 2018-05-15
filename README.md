@@ -1,2 +1,3 @@
-# gigaqbx-accuracy-experiments
-Accuracy experiments for GIGAQBX FMM translation operators
+# Accuracy experiments for GIGAQBX FMM translation operators
+
+TODO
