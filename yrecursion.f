@@ -1,15 +1,46 @@
 cc Copyright (C) 2009-2012: Leslie Greengard and Zydrunas Gimbutas
 cc Contact: greengard@cims.nyu.edu
-cc 
+cc
 cc This software is being released under a modified FreeBSD license
 cc (see COPYING in home directory).
+cc
+ccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
+cc License reproduced below:
+cc
+cc Copyright (c) 2009-2012, Leslie Greengard, Zydrunas Gimbutas
+cc All rights reserved.
+cc
+cc Redistribution and use in source and binary forms, with or without
+cc modification, are permitted provided that the following conditions are met:
+cc
+cc 1. Redistributions of source code must retain the above copyright notice, this
+cc    list of conditions and the following disclaimer.
+cc
+cc 2. Redistributions in binary form must reproduce the above copyright
+cc    notice, this list of conditions and the following disclaimer in the
+cc    documentation and/or other materials provided with the distribution.
+cc
+cc 3. Neither the name of the copyright holder nor the names of its
+cc    contributors may be used to endorse or promote products derived
+cc    from this software without specific prior written permission.
+cc
+cc THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+cc ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+cc WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+cc DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR
+cc ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+cc (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+cc LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+cc ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+cc (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+cc SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 ccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
 c
 c    $Date$
 c    $Revision$
 c
 c
-c  This file contains a suite of evaluation codes for associated 
+c  This file contains a suite of evaluation codes for associated
 c  Legendre functions with various scalings, arguent types, etc.
 c  Following is a brief description of the user-callable subroutines.
 c  (FORTRAN 77 VERSION).
@@ -20,13 +51,13 @@ ccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
 c
 c       ylgndr - evaluate normalized Legendre functions
 c
-c       ylgndr2 - evaluate normalized Legendre functions 
+c       ylgndr2 - evaluate normalized Legendre functions
 c                 and their derivatives
 c
 c       ylgndr2s - evaluate normalized Legendre functions and their
-c            derivatives with scaling. 
+c            derivatives with scaling.
 c            For m>0, the Ynm(x) values are scaled by 1/sqrt(1-x^2),
-c            For m>0, the Ynm(x) derivatives with respect to x are 
+c            For m>0, the Ynm(x) derivatives with respect to x are
 c            scaled by sqrt(1-x^2).
 c
 ccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
@@ -35,13 +66,13 @@ ccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
 c
 c       ylgndru - evaluate normalized Legendre functions
 c
-c       ylgndru2 - evaluate normalized Legendre functions 
+c       ylgndru2 - evaluate normalized Legendre functions
 c                 and their derivatives
 c
 c       ylgndru2s - evaluate normalized Legendre functions and their
-c            derivatives with scaling. 
+c            derivatives with scaling.
 c            For m>0, the Ynm(x) values are scaled by 1/sqrt(1-x^2),
-c            For m>0, the Ynm(x) derivatives with respect to x are 
+c            For m>0, the Ynm(x) derivatives with respect to x are
 c            scaled by sqrt(1-x^2).
 c
 ccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
@@ -49,9 +80,9 @@ c       Simple routines for real argument
 ccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
 c
 c       ylgndr2sm - evaluate normalized Legendre functions and their
-c            derivatives with scaling. 
+c            derivatives with scaling.
 c            For m>0, the Ynm(x) values are scaled by 1/sqrt(1-x^2)**m,
-c            For m>0, the Ynm(x) derivatives with respect to x are 
+c            For m>0, the Ynm(x) derivatives with respect to x are
 c            scaled by 1/sqrt(1-x^2)**(m-2).
 c
 ccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
@@ -61,14 +92,14 @@ c
 c       ylgndrini - precomputation routine for recursion coefficients.
 c                   Used by "fast" routines ylgndrf, ylgndr2f, ylgndr2sf.
 c
-c       ylgndrf - faster evaluation of normalized Legendre functions. 
+c       ylgndrf - faster evaluation of normalized Legendre functions.
 c                 Requires prior call to ylgndrini.
 c
-c       ylgndr2f - faster evaluation of normalized Legendre functions 
-c                  and their derivatives. 
+c       ylgndr2f - faster evaluation of normalized Legendre functions
+c                  and their derivatives.
 c                  Requires prior call to ylgndrini.
 c
-c       ylgndr2sf - faster evaluation of  normalized Legendre functions 
+c       ylgndr2sf - faster evaluation of  normalized Legendre functions
 c                   and their derivatives (with scaling as in ylgndr2s).
 c                   Requires prior call to ylgndrini.
 c
@@ -76,30 +107,30 @@ ccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
 c       Simple codes for complex argument.
 ccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
 c
-c       zylgndr - evaluate normalized Legendre functions 
+c       zylgndr - evaluate normalized Legendre functions
 c                 of a complex argument
 c
-c       zylgndr2 - evaluate normalized Legendre functions 
-c                  of a complex argument and their derivatives 
+c       zylgndr2 - evaluate normalized Legendre functions
+c                  of a complex argument and their derivatives
 c
-c       zylgndr2s - evaluate normalized Legendre functions 
-c                  of a complex argument and their derivatives 
+c       zylgndr2s - evaluate normalized Legendre functions
+c                  of a complex argument and their derivatives
 c                  (with scaling as in ylgndr2s)
 c
 ccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
 c       Accelerated codes with precompution for complex argument.
 ccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
 c
-c       zylgndrf - faster evaluation of normalized Legendre functions 
+c       zylgndrf - faster evaluation of normalized Legendre functions
 c                  of a complex argument.
 c                  Requires prior call to ylgndrini.
 c
-c       zylgndr2f - faster evaluation of normalized Legendre functions 
+c       zylgndr2f - faster evaluation of normalized Legendre functions
 c                   of a complex argument and their derivatives.
 c                   Requires prior call to ylgndrini.
 c
-c       zylgndr2sf - faster evaluation of normalized Legendre functions 
-c                    of a complex argument and their derivatives 
+c       zylgndr2sf - faster evaluation of normalized Legendre functions
+c                    of a complex argument and their derivatives
 c                   (with scaling as in ylgndr2s).
 c                   Requires prior call to ylgndrini.
 c
@@ -107,7 +138,7 @@ ccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
 c       Miscellaneous, special purpose codes.
 ccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
 c
-c       zylgndrbr - evaluate normalized Legendre functions of a 
+c       zylgndrbr - evaluate normalized Legendre functions of a
 c            complex argument with modified branch cut.
 c
 c       zylgndrsc - evaluate normalized Legendre functions of a complex
@@ -116,7 +147,7 @@ c            of z.
 c
 c       ylgndrpm, ylgndrpm_opt - Given Y_nm(x), return Y_nm(-x)
 c
-c       ylgndr2pm. ylgndrpm_opt - Given Y_nm(x) and Y'_nm(x), 
+c       ylgndr2pm. ylgndrpm_opt - Given Y_nm(x) and Y'_nm(x),
 c                                 return Y_nm(-x) and Y'_nm(-x)
 c
 ccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
@@ -125,26 +156,26 @@ c       orders up to specified parameter rather than max degree.
 ccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
 c
 c       ylgndr2s_trunc - evaluate normalized Legendre functions and their
-c            derivatives (with scaling as in ylgndr2s), 
+c            derivatives (with scaling as in ylgndr2s),
 c            BUT recursion carried out only to m = m2 rather than nmax.
 c
-c       ylgndrf_trunc - faster evaluation of normalized Legendre functions. 
-c            Same as ylgndrf, BUT recursion carried out only to m = m2 
+c       ylgndrf_trunc - faster evaluation of normalized Legendre functions.
+c            Same as ylgndrf, BUT recursion carried out only to m = m2
 c            rather than nmax.
 c            Requires prior call to ylgndrini.
 c
-c       ylgndr2f_trunc - faster evaluation of  normalized Legendre 
-c            functions and their derivatives. Same as ylgndr2f, 
+c       ylgndr2f_trunc - faster evaluation of  normalized Legendre
+c            functions and their derivatives. Same as ylgndr2f,
 c            BUT recursion carried out only to m = m2 rather than nmax.
 c
-c       ylgndr2sf_trunc - faster evaluation of normalized Legendre 
-c            functions and their derivatives (with scaling). 
-c            Same as ylgndr2sf, BUT recursion carried out only to 
+c       ylgndr2sf_trunc - faster evaluation of normalized Legendre
+c            functions and their derivatives (with scaling).
+c            Same as ylgndr2sf, BUT recursion carried out only to
 c            m = m2 rather than nmax.
 c
 ccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
-c       Accelerated codes with precompution for real argument: 
-c       precomputation is done only once for orders up to nmax, 
+c       Accelerated codes with precompution for real argument:
+c       precomputation is done only once for orders up to nmax,
 c       the routines are able to revert to simple routines for
 c       higher orders
 ccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
@@ -152,14 +183,14 @@ c
 c       ylgndrfwini - precomputation routine for recursion coefficients.
 c                   Used by "fast" routines ylgndrfw, ylgndr2fw, ylgndr2sfw.
 c
-c       ylgndrfw - faster evaluation of normalized Legendre functions. 
+c       ylgndrfw - faster evaluation of normalized Legendre functions.
 c                 Requires prior call to ylgndrfwini.
 c
-c       ylgndr2fw - faster evaluation of normalized Legendre functions 
-c                  and their derivatives. 
+c       ylgndr2fw - faster evaluation of normalized Legendre functions
+c                  and their derivatives.
 c                  Requires prior call to ylgndrfwini.
 c
-c       ylgndr2sfw - faster evaluation of  normalized Legendre functions 
+c       ylgndr2sfw - faster evaluation of  normalized Legendre functions
 c                   and their derivatives (with scaling as in ylgndr2s).
 c                   Requires prior call to ylgndrfwini.
 c
@@ -167,14 +198,14 @@ ccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
 c
 c       (not scaled by sqrt(2*n+1))
 c
-c       ylgndrufw - faster evaluation of normalized Legendre functions. 
+c       ylgndrufw - faster evaluation of normalized Legendre functions.
 c                 Requires prior call to ylgndrfwini.
 c
-c       ylgndru2fw - faster evaluation of normalized Legendre functions 
-c                  and their derivatives. 
+c       ylgndru2fw - faster evaluation of normalized Legendre functions
+c                  and their derivatives.
 c                  Requires prior call to ylgndrfwini.
 c
-c       ylgndru2sfw - faster evaluation of  normalized Legendre functions 
+c       ylgndru2sfw - faster evaluation of  normalized Legendre functions
 c                   and their derivatives (with scaling as in ylgndr2s).
 c                   Requires prior call to ylgndrfwini.
 c
@@ -219,7 +250,7 @@ c
 	 if (m.gt.0)  y(m,m)=y(m-1,m-1)*u*sqrt((2*m-1.0d0)/(2*m))
 	 if (m.lt.nmax)  y(m+1,m)=x*y(m,m)*sqrt(2*m+1.0d0)
 	 do n=m+2, nmax
-	    y(n,m)=((2*n-1)*x*y(n-1,m) - 
+	    y(n,m)=((2*n-1)*x*y(n-1,m) -
      1               sqrt((n+m-1.0d0)*(n-m-1.0d0))*y(n-2,m))
      2               /sqrt((n-m+0.0d0)*(n+m))
          enddo
@@ -274,10 +305,10 @@ c
 	 if (m.lt.nmax)  y(m+1,m)=x*y(m,m)*sqrt(2*m+1.0d0)
 	 if (m.lt.nmax)  d(m+1,m)=(x*d(m,m)+y(m,m))*sqrt(2*m+1.0d0)
 	 do n=m+2, nmax
-	    y(n,m)=((2*n-1)*x*y(n-1,m) - 
+	    y(n,m)=((2*n-1)*x*y(n-1,m) -
      1               sqrt((n+m-1.0d0)*(n-m-1.0d0))*y(n-2,m))
      2               /sqrt((n-m+0.0d0)*(n+m))
-	    d(n,m)=((2*n-1)*(x*d(n-1,m)+y(n-1,m)) - 
+	    d(n,m)=((2*n-1)*(x*d(n-1,m)+y(n-1,m)) -
      1               sqrt((n+m-1.0d0)*(n-m-1.0d0))*d(n-2,m))
      2               /sqrt((n-m+0.0d0)*(n+m))
          enddo
@@ -300,7 +331,7 @@ c
 c
 c     Evaluate scaled normalized Legendre functions and their derivatives
 c
-c     For m>0, 
+c     For m>0,
 c          the functions are scaled by 1/sqrt(1-x**2)
 c          the derivatives are scaled by sqrt(1-x**2)
 c
@@ -337,10 +368,10 @@ c
       if (m.lt.nmax)  y(m+1,m)=x*y(m,m)*sqrt(2*m+1.0d0)
       if (m.lt.nmax)  d(m+1,m)=(x*d(m,m)+y(m,m))*sqrt(2*m+1.0d0)
       do n=m+2, nmax
-        y(n,m)=((2*n-1)*x*y(n-1,m) - 
+        y(n,m)=((2*n-1)*x*y(n-1,m) -
      1               sqrt((n+m-1.0d0)*(n-m-1.0d0))*y(n-2,m))
      2               /sqrt((n-m+0.0d0)*(n+m))
-        d(n,m)=((2*n-1)*(x*d(n-1,m)+y(n-1,m)) - 
+        d(n,m)=((2*n-1)*(x*d(n-1,m)+y(n-1,m)) -
      1               sqrt((n+m-1.0d0)*(n-m-1.0d0))*d(n-2,m))
      2               /sqrt((n-m+0.0d0)*(n+m))
       enddo
@@ -354,13 +385,13 @@ c
 	 if (m.gt.0)  d(m,m)=y(m,m)*(-m)*x
 c
 	 if (m.lt.nmax)  y(m+1,m)=x*y(m,m)*sqrt(2*m+1.0d0)
-	 if (m.lt.nmax)  
+	 if (m.lt.nmax)
      $      d(m+1,m)=(x*d(m,m)+(1-x**2)*y(m,m))*sqrt(2*m+1.0d0)
 	 do n=m+2, nmax
-	    y(n,m)=((2*n-1)*x*y(n-1,m) - 
+	    y(n,m)=((2*n-1)*x*y(n-1,m) -
      1               sqrt((n+m-1.0d0)*(n-m-1.0d0))*y(n-2,m))
      2               /sqrt((n-m+0.0d0)*(n+m))
-	    d(n,m)=((2*n-1)*(x*d(n-1,m)+(1-x**2)*y(n-1,m)) - 
+	    d(n,m)=((2*n-1)*(x*d(n-1,m)+(1-x**2)*y(n-1,m)) -
      1               sqrt((n+m-1.0d0)*(n-m-1.0d0))*d(n-2,m))
      2               /sqrt((n-m+0.0d0)*(n+m))
          enddo
@@ -416,7 +447,7 @@ c
 	 if (m.gt.0)  y(m,m)=y(m-1,m-1)*u*sqrt((2*m-1.0d0)/(2*m))
 	 if (m.lt.nmax)  y(m+1,m)=x*y(m,m)*sqrt(2*m+1.0d0)
 	 do n=m+2, nmax
-	    y(n,m)=((2*n-1)*x*y(n-1,m) - 
+	    y(n,m)=((2*n-1)*x*y(n-1,m) -
      1               sqrt((n+m-1.0d0)*(n-m-1.0d0))*y(n-2,m))
      2               /sqrt((n-m+0.0d0)*(n+m))
          enddo
@@ -471,10 +502,10 @@ c
 	 if (m.lt.nmax)  y(m+1,m)=x*y(m,m)*sqrt(2*m+1.0d0)
 	 if (m.lt.nmax)  d(m+1,m)=(x*d(m,m)+y(m,m))*sqrt(2*m+1.0d0)
 	 do n=m+2, nmax
-	    y(n,m)=((2*n-1)*x*y(n-1,m) - 
+	    y(n,m)=((2*n-1)*x*y(n-1,m) -
      1               sqrt((n+m-1.0d0)*(n-m-1.0d0))*y(n-2,m))
      2               /sqrt((n-m+0.0d0)*(n+m))
-	    d(n,m)=((2*n-1)*(x*d(n-1,m)+y(n-1,m)) - 
+	    d(n,m)=((2*n-1)*(x*d(n-1,m)+y(n-1,m)) -
      1               sqrt((n+m-1.0d0)*(n-m-1.0d0))*d(n-2,m))
      2               /sqrt((n-m+0.0d0)*(n+m))
          enddo
@@ -497,7 +528,7 @@ c
 c
 c     Evaluate scaled normalized Legendre functions and their derivatives
 c
-c     For m>0, 
+c     For m>0,
 c          the functions are scaled by 1/sqrt(1-x**2)
 c          the derivatives are scaled by sqrt(1-x**2)
 c
@@ -536,10 +567,10 @@ c
       if (m.lt.nmax)  y(m+1,m)=x*y(m,m)*sqrt(2*m+1.0d0)
       if (m.lt.nmax)  d(m+1,m)=(x*d(m,m)+y(m,m))*sqrt(2*m+1.0d0)
       do n=m+2, nmax
-        y(n,m)=((2*n-1)*x*y(n-1,m) - 
+        y(n,m)=((2*n-1)*x*y(n-1,m) -
      1               sqrt((n+m-1.0d0)*(n-m-1.0d0))*y(n-2,m))
      2               /sqrt((n-m+0.0d0)*(n+m))
-        d(n,m)=((2*n-1)*(x*d(n-1,m)+y(n-1,m)) - 
+        d(n,m)=((2*n-1)*(x*d(n-1,m)+y(n-1,m)) -
      1               sqrt((n+m-1.0d0)*(n-m-1.0d0))*d(n-2,m))
      2               /sqrt((n-m+0.0d0)*(n+m))
       enddo
@@ -553,13 +584,13 @@ c
 	 if (m.gt.0)  d(m,m)=y(m,m)*(-m)*x
 c
 	 if (m.lt.nmax)  y(m+1,m)=x*y(m,m)*sqrt(2*m+1.0d0)
-	 if (m.lt.nmax)  
+	 if (m.lt.nmax)
      $      d(m+1,m)=(x*d(m,m)+u2*y(m,m))*sqrt(2*m+1.0d0)
 	 do n=m+2, nmax
-	    y(n,m)=((2*n-1)*x*y(n-1,m) - 
+	    y(n,m)=((2*n-1)*x*y(n-1,m) -
      1               sqrt((n+m-1.0d0)*(n-m-1.0d0))*y(n-2,m))
      2               /sqrt((n-m+0.0d0)*(n+m))
-	    d(n,m)=((2*n-1)*(x*d(n-1,m)+u2*y(n-1,m)) - 
+	    d(n,m)=((2*n-1)*(x*d(n-1,m)+u2*y(n-1,m)) -
      1               sqrt((n+m-1.0d0)*(n-m-1.0d0))*d(n-2,m))
      2               /sqrt((n-m+0.0d0)*(n+m))
          enddo
@@ -588,7 +619,7 @@ c
 c
 c     Evaluate scaled normalized Legendre functions and their derivatives
 c
-c     For m>0, 
+c     For m>0,
 c          the functions are scaled by 1/sqrt(1-x**2)**m
 c          the derivatives are scaled by 1/sqrt(1-x**2)**(m-2)
 c
@@ -627,10 +658,10 @@ c
       if (m.lt.nmax)  y(m+1,m)=x*y(m,m)*sqrt(2*m+1.0d0)
       if (m.lt.nmax)  d(m+1,m)=(x*d(m,m)+y(m,m))*sqrt(2*m+1.0d0)
       do n=m+2, nmax
-        y(n,m)=((2*n-1)*x*y(n-1,m) - 
+        y(n,m)=((2*n-1)*x*y(n-1,m) -
      1               sqrt((n+m-1.0d0)*(n-m-1.0d0))*y(n-2,m))
      2               /sqrt((n-m+0.0d0)*(n+m))
-        d(n,m)=((2*n-1)*(x*d(n-1,m)+y(n-1,m)) - 
+        d(n,m)=((2*n-1)*(x*d(n-1,m)+y(n-1,m)) -
      1               sqrt((n+m-1.0d0)*(n-m-1.0d0))*d(n-2,m))
      2               /sqrt((n-m+0.0d0)*(n+m))
       enddo
@@ -644,13 +675,13 @@ c
 	 if (m.gt.0)  d(m,m)=y(m,m)*(-m)*x
 c
 	 if (m.lt.nmax)  y(m+1,m)=x*y(m,m)*sqrt(2*m+1.0d0)
-	 if (m.lt.nmax)  
+	 if (m.lt.nmax)
      $      d(m+1,m)=(x*d(m,m)+u2*y(m,m))*sqrt(2*m+1.0d0)
 	 do n=m+2, nmax
-	    y(n,m)=((2*n-1)*x*y(n-1,m) - 
+	    y(n,m)=((2*n-1)*x*y(n-1,m) -
      1               sqrt((n+m-1.0d0)*(n-m-1.0d0))*y(n-2,m))
      2               /sqrt((n-m+0.0d0)*(n+m))
-	    d(n,m)=((2*n-1)*(x*d(n-1,m)+u2*y(n-1,m)) - 
+	    d(n,m)=((2*n-1)*(x*d(n-1,m)+u2*y(n-1,m)) -
      1               sqrt((n+m-1.0d0)*(n-m-1.0d0))*d(n-2,m))
      2               /sqrt((n-m+0.0d0)*(n+m))
          enddo
@@ -670,7 +701,7 @@ c
 c
 ccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
 c
-c       faster version for real argument 
+c       faster version for real argument
 c
 ccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
 c
@@ -681,7 +712,7 @@ c
 c
 c     Precompute the recurrence coefficients for the fast
 c     evaluation of normalized Legendre functions and their derivatives
-c    
+c
 c     Parameters:
 c       nmax                      must be non-negative
 c       rat1(0:nmax,0:nmax)       recurrence coefficient
@@ -738,7 +769,7 @@ c     y(0:nmax,0:nmax)      resulting function values
 c
 c     Upon return, y(n,m) will contain the function value Ynm(x) for 0
 c     <= n <= nmax and 0 <= m <= n.  Other elements of y will contain
-c     undefined values. 
+c     undefined values.
 c
 cf2py intent(in) nmax, x, rat1, rat2
 cf2py intent(out) y
@@ -832,7 +863,7 @@ c
 c
 c     Evaluate scaled normalized Legendre functions and their derivatives
 c
-c     Only for Ynm(x) with m>0 
+c     Only for Ynm(x) with m>0
 c          the functions are scaled by 1/sqrt(1-x**2)
 c          the derivatives are scaled by sqrt(1-x**2)
 c
@@ -884,7 +915,7 @@ c
 	 if (m.gt.0)  d(m,m)=y(m,m)*(-m)*x
 c
 	 if (m.lt.nmax)  y(m+1,m)=x*y(m,m)*rat1(m+1,m)
-	 if (m.lt.nmax)  
+	 if (m.lt.nmax)
      $      d(m+1,m)=(x*d(m,m)+u2*y(m,m))*rat1(m+1,m)
 	 do n=m+2, nmax
 	    y(n,m)=rat1(n,m)*x*y(n-1,m)-rat2(n,m)*y(n-2,m)
@@ -911,7 +942,7 @@ c
 c
 c     Evaluate scaled normalized Legendre functions and their derivatives
 c
-c     Only for Ynm(x) with m>0 
+c     Only for Ynm(x) with m>0
 c          the functions are scaled by 1/sqrt(1-x**2)
 c          the derivatives are scaled by sqrt(1-x**2)
 c
@@ -963,7 +994,7 @@ c
 	 if (m.gt.0)  d(m,m)=y(m,m)*(-m)*x
 c
 	 if (m.lt.nmax)  y(m+1,m)=x*y(m,m)*rat1(m+1,m)
-	 if (m.lt.nmax)  
+	 if (m.lt.nmax)
      $      d(m+1,m)=(x*d(m,m)+u2*y(m,m))*rat1(m+1,m)
 	 do n=m+2, nmax
 	    y(n,m)=rat1(n,m)*x*y(n-1,m)-rat2(n,m)*y(n-2,m)
@@ -1025,7 +1056,7 @@ c
 	 if (m.gt.0)  y(m,m)=y(m-1,m-1)*u*sqrt((2*m-1.0d0)/(2*m))
 	 if (m.lt.nmax)  y(m+1,m)=z*y(m,m)*sqrt(2*m+1.0d0)
 	 do n=m+2, nmax
-	    y(n,m)=((2*n-1)*z*y(n-1,m) - 
+	    y(n,m)=((2*n-1)*z*y(n-1,m) -
      1               sqrt((n+m-1.0d0)*(n-m-1.0d0))*y(n-2,m))
      2               /sqrt((n-m+0.0d0)*(n+m))
          enddo
@@ -1081,10 +1112,10 @@ c
 	 if (m.lt.nmax)  y(m+1,m)=z*y(m,m)*sqrt(2*m+1.0d0)
 	 if (m.lt.nmax)  d(m+1,m)=(z*d(m,m)+y(m,m))*sqrt(2*m+1.0d0)
 	 do n=m+2, nmax
-	    y(n,m)=((2*n-1)*z*y(n-1,m) - 
+	    y(n,m)=((2*n-1)*z*y(n-1,m) -
      1               sqrt((n+m-1.0d0)*(n-m-1.0d0))*y(n-2,m))
      2               /sqrt((n-m+0.0d0)*(n+m))
-	    d(n,m)=((2*n-1)*(z*d(n-1,m)+y(n-1,m)) - 
+	    d(n,m)=((2*n-1)*(z*d(n-1,m)+y(n-1,m)) -
      1               sqrt((n+m-1.0d0)*(n-m-1.0d0))*d(n-2,m))
      2               /sqrt((n-m+0.0d0)*(n+m))
          enddo
@@ -1108,7 +1139,7 @@ c
 c
 c     Evaluate scaled normalized Legendre functions and their derivatives
 c
-c     Only for Ynm(z) with m>0 
+c     Only for Ynm(z) with m>0
 c          the functions are scaled by 1/sqrt(1-z**2)
 c          the derivatives are scaled by sqrt(1-z**2)
 c
@@ -1145,10 +1176,10 @@ c
       if (m.lt.nmax)  y(m+1,m)=z*y(m,m)*sqrt(2*m+1.0d0)
       if (m.lt.nmax)  d(m+1,m)=(z*d(m,m)+y(m,m))*sqrt(2*m+1.0d0)
       do n=m+2, nmax
-        y(n,m)=((2*n-1)*z*y(n-1,m) - 
+        y(n,m)=((2*n-1)*z*y(n-1,m) -
      1               sqrt((n+m-1.0d0)*(n-m-1.0d0))*y(n-2,m))
      2               /sqrt((n-m+0.0d0)*(n+m))
-        d(n,m)=((2*n-1)*(z*d(n-1,m)+y(n-1,m)) - 
+        d(n,m)=((2*n-1)*(z*d(n-1,m)+y(n-1,m)) -
      1               sqrt((n+m-1.0d0)*(n-m-1.0d0))*d(n-2,m))
      2               /sqrt((n-m+0.0d0)*(n+m))
       enddo
@@ -1162,13 +1193,13 @@ c
 	 if (m.gt.0)  d(m,m)=y(m,m)*(-m)*z
 c
 	 if (m.lt.nmax)  y(m+1,m)=z*y(m,m)*sqrt(2*m+1.0d0)
-	 if (m.lt.nmax)  
+	 if (m.lt.nmax)
      $      d(m+1,m)=(z*d(m,m)+(1-z**2)*y(m,m))*sqrt(2*m+1.0d0)
 	 do n=m+2, nmax
-	    y(n,m)=((2*n-1)*z*y(n-1,m) - 
+	    y(n,m)=((2*n-1)*z*y(n-1,m) -
      1               sqrt((n+m-1.0d0)*(n-m-1.0d0))*y(n-2,m))
      2               /sqrt((n-m+0.0d0)*(n+m))
-	    d(n,m)=((2*n-1)*(z*d(n-1,m)+(1-z**2)*y(n-1,m)) - 
+	    d(n,m)=((2*n-1)*(z*d(n-1,m)+(1-z**2)*y(n-1,m)) -
      1               sqrt((n+m-1.0d0)*(n-m-1.0d0))*d(n-2,m))
      2               /sqrt((n-m+0.0d0)*(n+m))
          enddo
@@ -1204,7 +1235,7 @@ c     y(0:nmax,0:nmax)      resulting function values
 c
 c     Upon return, y(n,m) will contain the function value Ynm(z) for 0
 c     <= n <= nmax and 0 <= m <= n.  Other elements of y will contain
-c     undefined values. 
+c     undefined values.
 c
 cf2py intent(in) nmax, z, rat1, rat2
 cf2py intent(out) y
@@ -1298,7 +1329,7 @@ c
 c
 c     Evaluate scaled normalized Legendre functions and their derivatives
 c
-c     Only for Ynm(z) with m>0 
+c     Only for Ynm(z) with m>0
 c          the functions are scaled by 1/sqrt(1-z**2)
 c          the derivatives are scaled by sqrt(1-z**2)
 c
@@ -1349,7 +1380,7 @@ c
 	 if (m.gt.0)  d(m,m)=y(m,m)*(-m)*z
 c
 	 if (m.lt.nmax)  y(m+1,m)=z*y(m,m)*rat1(m+1,m)
-	 if (m.lt.nmax)  
+	 if (m.lt.nmax)
      $      d(m+1,m)=(z*d(m,m)+(1-z**2)*y(m,m))*rat1(m+1,m)
 	 do n=m+2, nmax
 	    y(n,m)=rat1(n,m)*z*y(n-1,m)-rat2(n,m)*y(n-2,m)
@@ -1397,7 +1428,7 @@ c     Upon return, y(n,m) will contain the function value Ynm(z)
 c     for 0 <= n <= nmax  and  0 <= m <= n.  Other elements of y
 c     will contain undefined values.
 c
-c       Modified branch cut at (0,+i) 
+c       Modified branch cut at (0,+i)
 c
 cf2py intent(in) nmax, z
 cf2py intent(out) y
@@ -1410,7 +1441,7 @@ c
 c
       u=-sqrt(1-z*z)
 c
-c     branch cut at (0,+i), select the lower branch 
+c     branch cut at (0,+i), select the lower branch
 c     of complex square root
 c
       if( imag(1-z*z) .gt. 0 .and. real(1-z*z) .lt. 0) u=+sqrt(1-z*z)
@@ -1422,7 +1453,7 @@ c
 	 if (m.gt.0)  y(m,m)=y(m-1,m-1)*u*sqrt((2*m-1.0d0)/(2*m))
 	 if (m.lt.nmax)  y(m+1,m)=z*y(m,m)*sqrt(2*m+1.0d0)
 	 do n=m+2, nmax
-	    y(n,m)=((2*n-1)*z*y(n-1,m) - 
+	    y(n,m)=((2*n-1)*z*y(n-1,m) -
      1               sqrt((n+m-1.0d0)*(n-m-1.0d0))*y(n-2,m))
      2               /sqrt((n-m+0.0d0)*(n+m))
          enddo
@@ -1491,7 +1522,7 @@ c           call prin2('ysc(m,m)=*',ysc(m,m),2)
             ysc(m+1,m)=z*scale*ysc(m,m)*sqrt(2*m+1.0d0)
          endif
 	 do n=m+2, nmax
-	    ysc(n,m)=((2*n-1)*scale*z*ysc(n-1,m) - 
+	    ysc(n,m)=((2*n-1)*scale*z*ysc(n-1,m) -
      1           sqrt((n+m-1.0d0)*(n-m-1.0d0))*scale**2*ysc(n-2,m))
      2           /sqrt((n-m+0.0d0)*(n+m))
          enddo
@@ -1511,7 +1542,7 @@ c
 ccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
 c
 c       truncated recurrences for Legendre functions:
-c    
+c
 c       Ynm(theta) for n = 0,nmax  but m = -m2,...,m2  with m2 < nmax.
 c
 ccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
@@ -1524,7 +1555,7 @@ c
 c
 c     Evaluate scaled normalized Legendre functions and their derivatives
 c
-c     Only for Ynm(x) with m>0 
+c     Only for Ynm(x) with m>0
 c          the functions are scaled by 1/sqrt(1-x**2)
 c          the derivatives are scaled by sqrt(1-x**2)
 c
@@ -1561,10 +1592,10 @@ c
       if (m.lt.nmax)  y(m+1,m)=x*y(m,m)*sqrt(2*m+1.0d0)
       if (m.lt.nmax)  d(m+1,m)=(x*d(m,m)+y(m,m))*sqrt(2*m+1.0d0)
       do n=m+2, nmax
-        y(n,m)=((2*n-1)*x*y(n-1,m) - 
+        y(n,m)=((2*n-1)*x*y(n-1,m) -
      1               sqrt((n+m-1.0d0)*(n-m-1.0d0))*y(n-2,m))
      2               /sqrt((n-m+0.0d0)*(n+m))
-        d(n,m)=((2*n-1)*(x*d(n-1,m)+y(n-1,m)) - 
+        d(n,m)=((2*n-1)*(x*d(n-1,m)+y(n-1,m)) -
      1               sqrt((n+m-1.0d0)*(n-m-1.0d0))*d(n-2,m))
      2               /sqrt((n-m+0.0d0)*(n+m))
       enddo
@@ -1578,13 +1609,13 @@ c
 	 if (m.gt.0)  d(m,m)=y(m,m)*(-m)*x
 c
 	 if (m.lt.nmax)  y(m+1,m)=x*y(m,m)*sqrt(2*m+1.0d0)
-	 if (m.lt.nmax)  
+	 if (m.lt.nmax)
      $      d(m+1,m)=(x*d(m,m)+(1-x**2)*y(m,m))*sqrt(2*m+1.0d0)
 	 do n=m+2, nmax
-	    y(n,m)=((2*n-1)*x*y(n-1,m) - 
+	    y(n,m)=((2*n-1)*x*y(n-1,m) -
      1               sqrt((n+m-1.0d0)*(n-m-1.0d0))*y(n-2,m))
      2               /sqrt((n-m+0.0d0)*(n+m))
-	    d(n,m)=((2*n-1)*(x*d(n-1,m)+(1-x**2)*y(n-1,m)) - 
+	    d(n,m)=((2*n-1)*(x*d(n-1,m)+(1-x**2)*y(n-1,m)) -
      1               sqrt((n+m-1.0d0)*(n-m-1.0d0))*d(n-2,m))
      2               /sqrt((n-m+0.0d0)*(n+m))
          enddo
@@ -1621,7 +1652,7 @@ c     y(0:nmax,0:nmax)      resulting function values
 c
 c     Upon return, y(n,m) will contain the function value Ynm(x) for 0
 c     <= n <= nmax and 0 <= m <= n.  Other elements of y will contain
-c     undefined values. 
+c     undefined values.
 c
 cf2py intent(in) nmax, m2, x, rat1, rat2
 cf2py intent(out) y
@@ -1656,20 +1687,20 @@ c
       implicit none
 c
 c     Evaluate normalized Legendre functions and their derivatives
-c    
+c
 c      Ynm(x) = sqrt(2n+1)  sqrt( (n-m)!/ (n+m)! ) Pnm(x)
-c    
+c
 c      d Ynm(x) / dx = sqrt(2n+1)  sqrt( (n-m)!/ (n+m)! ) d Pnm(x) / dx
-c    
+c
 c     for n = 0, 1, 2,..., nmax
 c     and  m = 0, 1,..., min(m2,n).
-c    
+c
 c     Parameters:
 c     nmax                  must be non-negative
 c     x                     -1 <= x <= 1
 c     y(0:nmax,0:nmax)      resulting function values
 c     d(0:nmax,0:nmax)      resulting derivative values
-c    
+c
 c     Upon return, y(n,m) will contain the function value Ynm(x) for 0
 c     <= n <= nmax and 0 <= m <= n.  Other elements of y will contain
 c     undefined values. The same convention for the derivatives.
@@ -1714,7 +1745,7 @@ c
 c
 c     Evaluate scaled normalized Legendre functions and their derivatives
 c
-c     Only for Ynm(x) with m>0 
+c     Only for Ynm(x) with m>0
 c          the functions are scaled by 1/sqrt(1-x**2)
 c          the derivatives are scaled by sqrt(1-x**2)
 c
@@ -1767,7 +1798,7 @@ c
 	 if (m.gt.0)  d(m,m)=y(m,m)*(-m)*x
 c
 	 if (m.lt.nmax)  y(m+1,m)=x*y(m,m)*rat1(m+1,m)
-	 if (m.lt.nmax)  
+	 if (m.lt.nmax)
      $      d(m+1,m)=(x*d(m,m)+u2*y(m,m))*rat1(m+1,m)
 	 do n=m+2, nmax
 	    y(n,m)=rat1(n,m)*x*y(n-1,m)-rat2(n,m)*y(n-2,m)
@@ -1791,7 +1822,7 @@ c
 ccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
 c
 c       Symmetries for Legendre functions
-c    
+c
 ccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
 c
 c
@@ -1806,7 +1837,7 @@ c
         do n=0,nterms
            do m=0,n
               if( mod(n+m,2) .eq. 1 ) y(n,m)=-y(n,m)
-           enddo       
+           enddo
         enddo
 c
         return
@@ -1832,7 +1863,7 @@ c
            do m=0,n
               if( mod(n+m,2) .eq. 1 ) y(n,m)=-y(n,m)
               if( mod(n+m,2) .eq. 0 ) d(n,m)=-d(n,m)
-           enddo       
+           enddo
         enddo
 c
         return
@@ -1852,13 +1883,13 @@ c
         do n=0,nterms,2
            do m=1,n,2
               y(n,m)=-y(n,m)
-           enddo       
+           enddo
         enddo
 c
         do n=1,nterms,2
            do m=0,n,2
               y(n,m)=-y(n,m)
-           enddo       
+           enddo
         enddo
 c
         return
@@ -1883,19 +1914,19 @@ c
         do n=0,nterms,2
            do m=0,n,2
               d(n,m)=-d(n,m)
-           enddo       
+           enddo
            do m=1,n,2
               y(n,m)=-y(n,m)
-           enddo       
+           enddo
         enddo
 c
         do n=1,nterms,2
            do m=0,n,2
               y(n,m)=-y(n,m)
-           enddo       
+           enddo
            do m=1,n,2
               d(n,m)=-d(n,m)
-           enddo       
+           enddo
         enddo
 c
         return
@@ -1916,7 +1947,7 @@ c
 c
 c     Precompute the recurrence coefficients for the fast
 c     evaluation of normalized Legendre functions and their derivatives
-c    
+c
 c     Parameters:
 c       nmax             must be non-negative
 c       w                  contains rat1 and rat2 arrays
@@ -1931,7 +1962,7 @@ c
       irat2=1+(nmax+1)**2
       lused=2*(nmax+1)**2
       if( lused .gt. lw ) return
-      
+
       call ylgndrini(nmax, w(irat1), w(irat2))
       return
       end
@@ -1957,7 +1988,7 @@ c     y(0:nterms,0:nterms)          resulting function values
 c
 c     Upon return, y(n,m) will contain the function value Ynm(x) for 0
 c     <= n <= nterms and 0 <= m <= n.  Other elements of y will contain
-c     undefined values. 
+c     undefined values.
 c
 cf2py intent(in) nterms, x, w, nmax
 cf2py intent(out) y
@@ -2028,7 +2059,7 @@ c
 c
 c     Evaluate scaled normalized Legendre functions and their derivatives
 c
-c     Only for Ynm(x) with m>0 
+c     Only for Ynm(x) with m>0
 c          the functions are scaled by 1/sqrt(1-x**2)
 c          the derivatives are scaled by sqrt(1-x**2)
 c
@@ -2088,7 +2119,7 @@ c     y(0:nterms,0:nterms)      resulting function values
 c
 c     Upon return, y(n,m) will contain the function value Ynm(x) for 0
 c     <= n <= nterms and 0 <= m <= n.  Other elements of y will contain
-c     undefined values. 
+c     undefined values.
 c
 cf2py intent(in) nterms, x, rat1, rat2, nmax
 cf2py intent(out) y
@@ -2181,7 +2212,7 @@ c
 c
 c     Evaluate scaled normalized Legendre functions and their derivatives
 c
-c     Only for Ynm(x) with m>0 
+c     Only for Ynm(x) with m>0
 c          the functions are scaled by 1/sqrt(1-x**2)
 c          the derivatives are scaled by sqrt(1-x**2)
 c
@@ -2233,7 +2264,7 @@ c
 	 if (m.gt.0)  d(m,m)=y(m,m)*(-m)*x
 c
 	 if (m.lt.nterms)  y(m+1,m)=x*y(m,m)*rat1(m+1,m)
-	 if (m.lt.nterms)  
+	 if (m.lt.nterms)
 ccc     $      d(m+1,m)=(x*d(m,m)+(1-x**2)*y(m,m))*rat1(m+1,m)
      $      d(m+1,m)=(x*d(m,m)+u2*y(m,m))*rat1(m+1,m)
 	 do n=m+2, nterms
@@ -2273,7 +2304,7 @@ c     y(0:nterms,0:nterms)          resulting function values
 c
 c     Upon return, y(n,m) will contain the function value Ynm(x) for 0
 c     <= n <= nterms and 0 <= m <= n.  Other elements of y will contain
-c     undefined values. 
+c     undefined values.
 c
 cf2py intent(in) nterms, x, w, nmax
 cf2py intent(out) y
@@ -2344,7 +2375,7 @@ c
 c
 c     Evaluate scaled normalized Legendre functions and their derivatives
 c
-c     Only for Ynm(x) with m>0 
+c     Only for Ynm(x) with m>0
 c          the functions are scaled by 1/sqrt(1-x**2)
 c          the derivatives are scaled by sqrt(1-x**2)
 c
@@ -2404,7 +2435,7 @@ c     y(0:nterms,0:nterms)      resulting function values
 c
 c     Upon return, y(n,m) will contain the function value Ynm(x) for 0
 c     <= n <= nterms and 0 <= m <= n.  Other elements of y will contain
-c     undefined values. 
+c     undefined values.
 c
 cf2py intent(in) nterms, x, rat1, rat2, nmax
 cf2py intent(out) y
@@ -2446,7 +2477,7 @@ c     y(0:nterms,0:nterms)      resulting function values
 c
 c     Upon return, y(n,m) will contain the function value Ynm(x) for 0
 c     <= n <= nterms and 0 <= m <= n.  Other elements of y will contain
-c     undefined values. 
+c     undefined values.
 c
 cf2py intent(in) nterms, x, rat1, rat2, nmax
 cf2py intent(out) y
@@ -2604,7 +2635,7 @@ c
 c
 c     Evaluate scaled normalized Legendre functions and their derivatives
 c
-c     Only for Ynm(x) with m>0 
+c     Only for Ynm(x) with m>0
 c          the functions are scaled by 1/sqrt(1-x**2)
 c          the derivatives are scaled by sqrt(1-x**2)
 c
@@ -2656,7 +2687,7 @@ c
 	 if (m.gt.0)  d(m,m)=y(m,m)*(-m)*x
 c
 	 if (m.lt.nterms)  y(m+1,m)=x*y(m,m)*rat1(m+1,m)
-	 if (m.lt.nterms)  
+	 if (m.lt.nterms)
      $      d(m+1,m)=(x*d(m,m)+u2*y(m,m))*rat1(m+1,m)
 	 do 220 n=m+2, nterms
 	    y(n,m)=rat1(n,m)*x*y(n-1,m)-rat2(n,m)*y(n-2,m)
@@ -2676,7 +2707,7 @@ c
 c
 c     Evaluate scaled normalized Legendre functions and their derivatives
 c
-c     Only for Ynm(x) with m>0 
+c     Only for Ynm(x) with m>0
 c          the functions are scaled by 1/sqrt(1-x**2)
 c          the derivatives are scaled by sqrt(1-x**2)
 c
