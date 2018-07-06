@@ -388,9 +388,9 @@ def generate_report():
 
     # Generate raw output tables.
 
-    m2p_results = pd.read_json(M2P_FILE)
-    l2p_results = pd.read_json(L2P_FILE)
-    m2l_results = pd.read_json(M2L_FILE)
+    m2p_results = pd.read_pickle(M2P_FILE)
+    l2p_results = pd.read_pickle(L2P_FILE)
+    m2l_results = pd.read_pickle(M2L_FILE)
 
     for R in BIG_R_VALS:
         df = m2p_results.query(f"R == {R}")
@@ -488,9 +488,9 @@ def tabulate(df):
 # }}}
 
 
-M2P_FILE = "m2p-results.json"
-L2P_FILE = "l2p-results.json"
-M2L_FILE = "m2l-results.json"
+M2P_FILE = "m2p-results.df"
+L2P_FILE = "l2p-results.df"
+M2L_FILE = "m2l-results.df"
 
 
 if __name__ == "__main__":
@@ -504,14 +504,14 @@ if __name__ == "__main__":
 
     if not os.path.exists(M2P_FILE):
         df = run_m2p_experiment()
-        df.to_json(M2P_FILE)
+        df.to_pickle(M2P_FILE)
 
     if not os.path.exists(L2P_FILE):
         df = run_l2p_experiment()
-        df.to_json(L2P_FILE)
+        df.to_pickle(L2P_FILE)
 
     if not os.path.exists(M2L_FILE):
         df = run_m2l_experiment()
-        df.to_json(M2L_FILE)
+        df.to_pickle(M2L_FILE)
 
     print(generate_report())
