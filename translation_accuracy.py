@@ -58,6 +58,19 @@ def sphere_sample(npoints_approx, r=1):
     return np.array(points)
 
 
+def visualize_sphere_sample(npoints=72):
+    from mpl_toolkits.mplot3d import Axes3D
+    import matplotlib.pyplot as plt
+
+    fig = plt.figure()
+    ax = fig.add_subplot(111, projection='3d')
+
+    points = sphere_sample(npoints).T
+    ax.scatter(points[0,:], points[1,:], points[2,:])
+
+    plt.show()
+
+
 def ball_sample(nshells, npoints_approx_per_shell, r=1):
     """Generate points sampled along a number of shells of a ball."""
     points = [(0, 0, 0)]
@@ -493,7 +506,11 @@ L2P_FILE = "l2p-results.df"
 M2L_FILE = "m2l-results.df"
 
 
-if __name__ == "__main__":
+def main():
+    if 0:
+        visualize_sphere_sample()
+        return
+
     import os
     os.nice(19)
 
@@ -515,3 +532,7 @@ if __name__ == "__main__":
         df.to_pickle(M2L_FILE)
 
     print(generate_report())
+
+
+if __name__ == "__main__":
+    main()
