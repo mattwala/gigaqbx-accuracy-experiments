@@ -318,51 +318,6 @@ def m2l_experiment(param):
 
 # {{{ data processing
 
-def tabulate(df):
-    rows = []
-
-    # Header material
-    rows.append(r"\begin{tabular}{rrrSSSSS}")
-    rows.append(r"\toprule")
-    indices = ("ratio", "p", "rho")
-    tex_indices = dict(ratio=r"$r/\rho$", p="$p$", rho=r"$\rho$")
-    column_names = [" & ".join(rf"\cc{{{tex_indices[index]}}}" for
-                               index in indices)]
-    for q in Q_VALS:
-        column_names.append(rf"\cc{{$q={q}$}}")
-    rows.append(" & ".join(column_names) + r"\\")
-
-    # Body material
-    tab = df.pivot_table(values="error", index=indices, columns="q")
-
-    def rho_format(rho):
-        if rho.is_integer():
-            rho = int(rho)
-        return str(rho)
-
-    tab = tab.rename(rho_format, axis="index", level=indices.index("rho"))
-    body = tab.to_latex(float_format="%e", multirow=True).split("\n")
-    del body[:body.index(r"\midrule")]
-
-    # Hackery to get ride of certain formatting
-    # - replace cline with cmidrule
-    # - get rid of repeated instances of cline
-    # - remote multirow statements
-    for line in body:
-        if line.startswith(r"\cline"):
-            if line.startswith(r"\cline{1"):
-                rows.append(line.replace("cline", "cmidrule"))
-            else:
-                if not rows[-1].startswith("\cmidrule"):
-                    rows[-1] += "[1ex]"
-        else:
-            line = re.sub(r"\\multirow\{\d+\}\{\*\}\{([0-9.]*)\}", r"\1", line)
-            rows.append(line)
-
-    # Generated body includes footer material
-    return "\n".join(rows).strip()
-
-
 HEADER = r"""\documentclass{article}
 \usepackage{booktabs}
 \usepackage{multirow}
