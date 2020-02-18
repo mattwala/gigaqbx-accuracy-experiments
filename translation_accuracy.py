@@ -369,7 +369,7 @@ def generate_report():
     report.extend(get_table(l2p_results, caption))
 
     for R in BIG_R_VALS:
-        df = m2p_results.query(f"R == {R}")
+        df = m2l_results.query(f"R == {R}")
         caption = f"M2L results, $R = {R}$"
         report.extend(get_table(df, caption))
 
