@@ -6,21 +6,19 @@ experiments in the paper
 
 ## Installation and Usage
 
-First check that you have the necessary software
+The following software is required:
 
  * a Fortran compiler
  * SciPy
  * Pandas
  * [sumpy](https://github.com/inducer/sumpy)
 
-To run the code, first compile the auxiliary Python module for evaluating
-associated Legendre functions with `./build.sh`.
-
-Then you can verify the translation operators work by running the test
-`./test_l3d.py`.
+To build the code, run `./build.sh`, which compiles an auxiliary Python module
+for evaluating associated Legendre functions. You can verify that the build
+succeeded by running the tests in `./test_l3d.py`.
 
 The script `./translation_accuracy.py` contains the accuracy experiments
 described in the paper. Running this script generates a LaTeX report file. By
-default, the script uses the saved data in the *.csv files and does not re-run
-the experiments. To re-run the experiments, move/delete the saved *.csv data
+default, the script uses the saved data in the \*.csv files and does not re-run
+the experiments. To re-run the experiments, move/delete the saved \*.csv data
 first.
