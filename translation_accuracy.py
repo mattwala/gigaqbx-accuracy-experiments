@@ -460,7 +460,7 @@ def tabulate(df):
     body = tab.to_latex(float_format="%e", multirow=True).split("\n")
     del body[:body.index(r"\midrule")]
 
-    # Hackery to get ride of certain formatting
+    # Hackery to get rid of certain formatting
     # - replace cline with cmidrule
     # - get rid of repeated instances of cline
     # - remote multirow statements
